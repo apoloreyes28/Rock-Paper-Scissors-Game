@@ -1,0 +1,139 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* lo primero que hacemos es acomodar y darle estilo a todos los elementos
+y después les damos las dinámicas (efectos) y animaciones que van a tener. */
+body {
+  height: 100vh;
+
+/* ponemos todo al centro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6f7fb;
+}
+::selection {
+  color: #fff;
+  background-color: #7d2ae8;
+}
+
+/* este es el contenedor de las imagenes */
+.container {
+  padding: 2rem 7rem;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* estas son las imagenes que muestran el resultado (el juego en si) */
+.result_images {
+  display: flex;
+  column-gap: 7rem;
+}
+
+/* 
+esto crea la animación de mover las manos y asi jugar al Piedra, Papel o Tijera.
+
+cuando seleccionamos una imagen de opción empieza el juego y todo lo demás se detiene
+ya que el contenedor tiene la clase: start, la cual le dice que se activen las animaciones.
+*/
+/* esta es la mano del Jugador */
+.container.start .user_result {
+  transform-origin: left;
+  animation: userShake 0.5s ease infinite;
+}
+@keyframes userShake {
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+/* esta es la mano del CPU */
+.container.start .cpu_result {
+  transform-origin: right;
+  animation: cpuShake 0.5s ease infinite;
+}
+@keyframes cpuShake {
+  50% {
+    transform: rotate(-10deg);
+  }
+}
+
+/* este es el tamaño para las imagenes */
+.result_images img {
+  width: 100px;
+}
+
+/* aqui giramos la mano del jugador (que está hacia la izquierda) */
+.user_result img {
+  transform: rotate(90deg);
+}
+
+/* aqui giramos la mano del CPU (que está hacia la derecha) */
+.cpu_result img {
+  transform: rotate(-90deg) rotateY(180deg);
+}
+
+/* esto nos dice el resultado (quien es el ganador) */
+.result {
+  text-align: center;
+  font-size: 2rem;
+  color: #7d2ae8;
+  margin-top: 1.5rem;
+}
+
+/* este es el tamaño de las imagenes de opciones (son como botones) */
+.option_image img {
+  width: 50px;
+}
+
+/* este es el contenedor de dichas imagenes de opciones con el cual las acomodamos */
+.option_images {
+  display: flex;
+  align-items: center;
+  margin-top: 2.5rem;
+  justify-content: space-between;
+}
+.container.start .option_images {
+  pointer-events: none;
+}
+
+/* con esto acomodamos el texto debajo de las imagenes de opciones */
+.option_image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+/* le damos una opacidad baja y asi al hacer click se puedan ver con más color */
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  /* esto retarda el efecto :hover para que se pueda ver mejor */
+}
+.option_image:hover {
+  opacity: 1;
+}
+/* ---------------------------- */
+
+/* esto hace que al dar click en una opción esta se active y se pueda ver mejor */
+.option_image.active {
+  opacity: 1;
+  /* esta clase .active se crea solo en la imagen de opción a la cual le damos click */
+}
+.option_image img {
+  pointer-events: none;
+}
+
+/* con esto les damos los estilos al texto de las imagenes de opciones */
+.option_image p {
+  color: #7d2ae8;
+  font-size: 1.235rem;
+  margin-top: 1rem;
+  pointer-events: none;
+}
